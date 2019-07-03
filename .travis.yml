@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t teckgiik101/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run teckgiik101/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t teckgiik101/dcac-client ./client
+  - docker build -t teckgiik101/dcac-nginx ./nginx
+  - docker build -t teckgiik101/dcac-server ./server
+  - docker build -t teckgiik101/dcac-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push teckgiik101/dcac-client
+  - docker push teckgiik101/dcac-nginx
+  - docker push teckgiik101/dcac-server
+  - docker push teckgiik101/dcac-worker
