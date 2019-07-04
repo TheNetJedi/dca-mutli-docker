@@ -21,11 +21,11 @@ after_success:
 
 deploy:
   provider: elasticbeanstalk
-  regoin: ap-south-1
-  app: multidoc
-  env: Multidoc-env
-  bucket_name: elasticbeanstalk-ap-south-1-411040180627
-  bucket_path: multidoc
+  regoin: "ap-south-1"
+  app: "multidoc"
+  env: "Multidoc-env"
+  bucket_name: "elasticbeanstalk-ap-south-1-411040180627"
+  bucket_path: "multidoc"
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
