@@ -1,0 +1,31 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "teckgiik101/dcac-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "teckgiik101/dcac-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "teckgiik101/dcac-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [{ "hostPort": 80, "containerPort": 80 }],
+      "links": ["client", "server"]
+    },
+    {
+      "name": "worker",
+      "image": "teckgiik101/dcac-worker",
+      "hostname": "worker",
+      "essential": false
+    }
+  ]
+}
